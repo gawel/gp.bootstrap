@@ -1,4 +1,10 @@
-Small script to deal with zc.buildout. Download the ``bootstrap.py`` script if needed and set a default  ``buildout.cfg`` if needed too
+Create a ``~/.buildout/default.cfg`` if it doesn't exist
+
+Create a ``buildout.cfg`` based on ``~/.buildout/template.cfg`` if it doesn't exist
+
+Download the ``bootstrap.py`` script if needed.
+
+Then run ``bin/buildout``.
 
 Example::
 
