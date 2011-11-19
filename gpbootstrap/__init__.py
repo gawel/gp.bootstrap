@@ -69,7 +69,7 @@ def main():
         interpreter = sys.executable
     log.info('Using %s', interpreter)
 
-    if interpreter[0] == '3':
+    if '3.' in interpreter:
         bootstrap_url = 'http://svn.zope.org/*checkout*/zc.buildout/branches/2/bootstrap/bootstrap.py'
         bootstrap_script = 'bootstrap-py3k.py'
         buildout_cfg = 'buildout-py3k.cfg'
@@ -86,11 +86,10 @@ def main():
     if not os.path.isfile(buildout_cfg):
         open(buildout_cfg, 'w').write(open(template_cfg).read())
 
-    if not os.path.isfile('bin/buildout'):
-        log.debug('Running %s', bootstrap_script)
-        subprocess.call([interpreter, bootstrap_script,
-                    '--eggs=%s' % eggs_directory,
-                    '-c', buildout_cfg, '-d'])
+    log.debug('Running %s', bootstrap_script)
+    subprocess.call([interpreter, bootstrap_script,
+                '--eggs=%s' % eggs_directory,
+                '-c', buildout_cfg, '-d'])
     log.debug('Running bin/buildout with %s', buildout_cfg)
     subprocess.call(['bin/buildout', '-c', buildout_cfg] + sys.argv[1:])
 
