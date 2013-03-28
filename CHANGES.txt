@@ -1,3 +1,8 @@
+0.2
+===
+
+Fix bootstrap url
+
 0.1
 ===
 
