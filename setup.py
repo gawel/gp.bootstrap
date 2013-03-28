@@ -1,7 +1,8 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
-version = '0.1'
+version = '0.1.dev0'
+
 
 def read(*names):
     values = dict()
@@ -14,7 +15,8 @@ def read(*names):
         values[name] = value
     return values
 
-long_description="""
+
+long_description = """
 %(README)s
 
 News
@@ -29,16 +31,16 @@ setup(name='gp.bootstrap',
       description="Small script to deal with zc.buildout bootstrapping",
       long_description=long_description,
       classifiers=[
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
-        'Operating System :: POSIX',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: MIT License',
+          'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
+          'Operating System :: POSIX',
       ],
       keywords='',
       author='Gael Pasgrimaud',
       author_email='gael@gawel.org',
       license='MIT',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'docs', 'tests']),
+      packages=find_packages(exclude=['ez_setup', 'docs', 'tests']),
       include_package_data=True,
       zip_safe=True,
       install_requires=[
