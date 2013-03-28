@@ -17,8 +17,7 @@ parts = eggs
 develop = .
 
 [eggs]
-recipe = z3c.recipe.scripts
-script-initialization =
+recipe = zc.recipe.egg
 initialization =
 entry-points =
 eggs =
@@ -32,6 +31,7 @@ eggs-directory = %s
 ''' % os.path.expanduser('~/eggs')
 
 _re_interpreter = re.compile(r'[23]{1}\.[0-9]{1}')
+
 
 def main():
     """main script
@@ -69,14 +69,10 @@ def main():
         interpreter = sys.executable
     log.info('Using %s', interpreter)
 
-    if '3.' in interpreter:
-        bootstrap_url = 'http://svn.zope.org/*checkout*/zc.buildout/branches/2/bootstrap/bootstrap.py'
-        bootstrap_script = 'bootstrap-py3k.py'
-        buildout_cfg = 'buildout-py3k.cfg'
-    else:
-        bootstrap_url = 'http://svn.zope.org/*checkout*/zc.buildout/trunk/bootstrap/bootstrap.py'
-        bootstrap_script = 'bootstrap.py'
-        buildout_cfg = 'buildout.cfg'
+    bootstrap_url = ('https://github.com/buildout/buildout/'
+                     'raw/2/bootstrap/bootstrap.py')
+    bootstrap_script = 'bootstrap.py'
+    buildout_cfg = 'buildout.cfg'
 
     if not os.path.isfile(bootstrap_script):
         log.debug('Fetching %s', bootstrap_url)
@@ -88,8 +84,7 @@ def main():
 
     log.debug('Running %s', bootstrap_script)
     subprocess.call([interpreter, bootstrap_script,
-                '--eggs=%s' % eggs_directory,
-                '-c', buildout_cfg, '-d'])
+                    '--eggs=%s' % eggs_directory,
+                    '-c', buildout_cfg, '-d'])
     log.debug('Running bin/buildout with %s', buildout_cfg)
     subprocess.call(['bin/buildout', '-c', buildout_cfg] + sys.argv[1:])
-
