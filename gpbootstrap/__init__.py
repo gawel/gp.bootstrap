@@ -70,7 +70,7 @@ def main():
     log.info('Using %s', interpreter)
 
     bootstrap_url = ('https://github.com/buildout/buildout/'
-                     'raw/2/bootstrap/bootstrap.py')
+                     'raw/master/bootstrap/bootstrap.py')
     bootstrap_script = 'bootstrap.py'
     buildout_cfg = 'buildout.cfg'
 
@@ -84,7 +84,7 @@ def main():
 
     log.debug('Running %s', bootstrap_script)
     subprocess.call([interpreter, bootstrap_script,
-                    '--eggs=%s' % eggs_directory,
-                    '-c', buildout_cfg, '-d'])
+                    '--allow-site-packages',
+                    '-c', buildout_cfg])
     log.debug('Running bin/buildout with %s', buildout_cfg)
     subprocess.call(['bin/buildout', '-c', buildout_cfg] + sys.argv[1:])
